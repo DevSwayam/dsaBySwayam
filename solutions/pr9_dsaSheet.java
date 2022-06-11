@@ -1,24 +1,15 @@
-lass Solution {
+class Solution {
     public int subarraysDivByK(int[] nums, int k) {
-        int ans = 0; // inoitialise sum 0 
-        HashMap <Integer,Integer> map = new HashMap<>(); // intialise hash map
-        map.put(0,1); // started map for 0 remainder with 1 repetation 
-        int sum =0; // intialsie sum
-        int rem =0; // intialise remainder
-        for(int i =0 ; i<nums.length; i++){ // trace the whole array until last element 
-            sum += nums[i]; // sum of current element is equal to sum till last element + value of current element 
-            rem = sum%k; // to finf remainder
-            if(rem<0){ // if remainder is negative 
-                rem =+ k; // then add the given number 
-            }
-            if(map.containsKey(rem)){ // for vhecking the repeatation of remainders 
-                ans += map.get(rem); // to store the remainder in ans 
-                map.put(rem , map.get(rem)+1); // upadtae the remainder if its available 
-            }else{
-                map.put(rem,1); // if remainder occur for first time then puit value of it in hashmap
-            }
+        int [] counts = new int[k]; // for stroing counts 
+        int sum = 0; // intialising sum 
+        for(int i =0 ; i<nums.length ; i++ ){ // to get reminder 
+            sum += (nums[i]%k) + k; // for negative elements we will get negative remsinder do adding back k will give us exact value 
+            counts[sum%k]++; // store the number of times the remainder is repeated in counts array 
         }
-        
-        return ans; // return answer
+        int result = counts[0]; // if started counts equal to 0 then qst element is divisible 
+        for(int j = 0 ; j<k ; j++){ // to gwt total results
+            result += (counts[j]*(counts[j]-1))/2; // n c r formula from 12th 
+        }
+        return result ; // return result 
     }
 }
