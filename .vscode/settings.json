@@ -5,6 +5,7 @@
         "deque": "cpp",
         "list": "cpp",
         "string_view": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "map": "cpp"
     }
 }
